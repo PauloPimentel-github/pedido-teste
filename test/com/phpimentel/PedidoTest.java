@@ -5,6 +5,11 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Classe de testes
+ * @author phpimentel
+ *
+ */
 public class PedidoTest {
 	
 	private PedidoBuilder pedido;
@@ -60,8 +65,7 @@ public class PedidoTest {
 	private void assertResumoPedido(double valorTotal, double desconto) {
 		ResumoPedido resumoPedido = this.pedido.construir().resumo();
 		
-		assertEquals(valorTotal, resumoPedido.getValorTotal(), 0.0001);
-		assertEquals(desconto, resumoPedido.getDesconto(), 0.0001);
+		assertEquals(new ResumoPedido(valorTotal, desconto), resumoPedido);
 	}
 	
 }
