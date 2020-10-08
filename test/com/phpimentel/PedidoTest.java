@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.phpimentel.exception.QuantidadeItensInvalidaException;
+
 /**
  * Classe de testes
  * @author phpimentel
@@ -60,6 +62,11 @@ public class PedidoTest {
 					 .comItem(15.0, 30);
 		
 		this.assertResumoPedido(1200.0, 96.0);
+	}
+	
+	@Test(expected = QuantidadeItensInvalidaException.class)
+	public void naoAceitarPedidosComItensComQuantidadesNegativas() throws Exception {
+		this.pedido.comItem(0.0, -10);
 	}
 
 	private void assertResumoPedido(double valorTotal, double desconto) {

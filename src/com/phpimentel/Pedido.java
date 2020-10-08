@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.phpimentel.chain.CalculaFaixaDescontoChain;
+import com.phpimentel.exception.QuantidadeItensInvalidaException;
 
 /**
  * Classe - Pedido
@@ -26,6 +27,8 @@ public class Pedido {
 	/***** PUBLIC METHODS *****/
 	
 	public void adicionarItem(ItemPedido itemPedido) {
+		validarQuantidadeItens(itemPedido);
+		
 		this.itens.add(itemPedido);
 	}
 	
@@ -34,5 +37,12 @@ public class Pedido {
 		double desconto = this.calculaFaixaDescontoChain.desconto(valorTotal);
 		
 		return new ResumoPedido(valorTotal, desconto);
+	}
+	
+	
+	/***** PIVATE METHODS *****/
+	private void validarQuantidadeItens(ItemPedido itemPedido) {
+		if (itemPedido.getQuantidade() < 0)
+			throw new QuantidadeItensInvalidaException();
 	}
 }
